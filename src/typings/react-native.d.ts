@@ -701,6 +701,7 @@ declare module 'react-native' {
 
     class AccessibilityInfo {
         static fetch: () => Promise<boolean>;
+        static fetchIsHighContrast: () => Promise<boolean>;
         static addEventListener(type: string, handler: (event: any) => void): void;
         static removeEventListener(type: string, handler: (event: any) => void): void;
         static announceForAccessibility(announcement: string): void;
