@@ -6,21 +6,18 @@
 */
 
 import RN = require('react-native');
-import SubscribableEvent from 'subscribableevent';
 import { Accessibility as NativeAccessibility } from '../native-common/Accessibility';
 import SyncTasks = require('synctasks');
 
 export class Accessibility extends NativeAccessibility {
-    private _isHighContrast = RN.AccessibilityInfo && RN.AccessibilityInfo.initialHighContrast;
+    private _isHighContrast = RN.AccessibilityInfo.initialHighContrast;
 
     constructor() {
         super();
 
-        if (RN.AccessibilityInfo) {
-            RN.AccessibilityInfo.addEventListener('highContrastDidChange', isEnabled => {
-                this._updateIsHighContrast(isEnabled);
-            });
-        }
+        RN.AccessibilityInfo.addEventListener('highContrastDidChange', isEnabled => {
+            this._updateIsHighContrast(isEnabled);
+        });
     }
 
     private _updateIsHighContrast(isEnabled: boolean) {
@@ -30,7 +27,7 @@ export class Accessibility extends NativeAccessibility {
         }
     }
 
-    isHighContrastEnabled(): boolean|undefined {
+    isHighContrastEnabled(): boolean {
         return this._isHighContrast;
     }
 }
