@@ -700,6 +700,7 @@ declare module 'react-native' {
     }
 
     class AccessibilityInfo {
+        static initialHighContrast: boolean|undefined;
         static fetch: () => Promise<boolean>;
         static fetchIsHighContrast: () => Promise<boolean>;
         static addEventListener(type: string, handler: (event: any) => void): void;

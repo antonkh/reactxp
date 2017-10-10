@@ -11,26 +11,15 @@ import { Accessibility as NativeAccessibility } from '../native-common/Accessibi
 import SyncTasks = require('synctasks');
 
 export class Accessibility extends NativeAccessibility {
-    private _isHighContrast: boolean|undefined;
+    private _isHighContrast = RN.AccessibilityInfo && RN.AccessibilityInfo.initialHighContrast;
 
     constructor() {
         super();
 
         if (RN.AccessibilityInfo) {
-            let initialStateChanged = false;
-
             RN.AccessibilityInfo.addEventListener('highContrastDidChange', isEnabled => {
-                initialStateChanged = true;
                 this._updateIsHighContrast(isEnabled);
             });
-
-            if (RN.AccessibilityInfo.fetchIsHighContrast) {
-                RN.AccessibilityInfo.fetchIsHighContrast().then(isEnabled => {
-                    if (!initialStateChanged) {
-                        this._updateIsHighContrast(isEnabled);
-                    }
-                });
-            }
         }
     }
 
