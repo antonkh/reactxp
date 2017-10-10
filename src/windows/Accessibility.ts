@@ -17,13 +17,18 @@ export class Accessibility extends NativeAccessibility {
         super();
 
         if (RN.AccessibilityInfo) {
+            let initialStateChanged = false;
+
             RN.AccessibilityInfo.addEventListener('highContrastDidChange', isEnabled => {
+                initialStateChanged = true;
                 this._updateIsHighContrast(isEnabled);
             });
 
             if (RN.AccessibilityInfo.fetchIsHighContrast) {
                 RN.AccessibilityInfo.fetchIsHighContrast().then(isEnabled => {
-                    this._updateIsHighContrast(isEnabled);
+                    if (!initialStateChanged) {
+                        this._updateIsHighContrast(isEnabled);
+                    }
                 });
             }
         }
