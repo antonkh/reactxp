@@ -175,10 +175,11 @@ export interface ViewStyle extends ViewAndImageCommonStyle {
     shadowOpacity?: number;
     shadowRadius?: number;
     shadowColor?: string;
+    reveal?: boolean;
     // Android does not support shadow, elevation achieves something similar.
     // http://facebook.github.io/react-native/releases/0.30/docs/shadow-props.html (iOS only)
     // http://facebook.github.io/react-native/releases/0.30/docs/view.html#style (see elevation property)
-    elevation?: number; // Android only
+    elevation?: number; // Android only    
 }
 
 export type ViewStyleRuleSet = StyleRuleSet<ViewStyle>;
